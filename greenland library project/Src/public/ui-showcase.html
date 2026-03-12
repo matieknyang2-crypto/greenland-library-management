@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LibrarySys UI Showcase</title>
+    <style>
+        :root {
+            --primary: #667eea;
+            --primary-dark: #5a67d8;
+            --secondary: #764ba2;
+            --success: #48bb78;
+            --danger: #f56565;
+            --warning: #ed8936;
+            --dark: #2d3748;
+            --light: #f7fafc;
+            --gray-100: #f7fafc;
+            --gray-200: #edf2f7;
+            --gray-300: #e2e8f0;
+            --gray-600: #4a5568;
+            --gray-800: #2d3748;
+            --shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--gray-100) 0%, #e6e6e6 100%);
+            line-height: 1.6;
+            color: var(--gray-800);
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+        /* Header */
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        .header h1 { 
+            font-size: 3rem; 
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+        .header p { color: var(--gray-600); font-size: 1.2rem; }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary);
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card.success { border-top-color: var(--success); }
+        .card.danger { border-top-color: var(--danger); }
+        .card.warning { border-top-color: var(--warning); }
+
+        .card h3 { 
+            font-size: 1.5rem; 
+            margin-bottom: 1rem; 
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin: 0.25rem;
+        }
+
+        .btn-primary { 
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
+            color: white; 
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3); }
+
+        .btn-success { background: var(--success); color: white; }
+        .btn-danger { background: var(--danger); color: white; }
+        .btn-warning { background: var(--warning); color: white; }
+        .btn-outline { 
+            background: transparent; 
+            color: var(--primary); 
+            border: 2px solid var(--primary); 
+        }
+
+        /* Table */
+        .table-container {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        th, td {
+            padding: 1rem 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        th {
+            background: var(--gray-100);
+            font-weight: 600;
+            color: var(--gray-800);
+            position: sticky; top: 0;
+        }
+        tr:hover { background: var(--gray-100); }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--primary);
+        }
+        .stat-number { font-size: 2.5rem; font-weight: 800; color: var(--primary); }
+        .stat-label { color: var(--gray-600); font-weight: 500; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .header h1 { font-size: 2rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card, .table-container { animation: fadeInUp 0.6s ease-out; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 LibrarySys UI</h1>
+            <p>Modern, responsive interface showcase</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">1,247</div>
+                <div class="stat-label">Books</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">324</div>
+                <div class="stat-label">Active Loans</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">89%</div>
+                <div class="stat-label">On Time</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Overdue</div>
+            </div>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <h3>📖 Book Management</h3>
+                <p>Complete CRUD operations for your library catalog with search, filtering, and bulk actions.</p>
+                <div>
+                    <a href="#" class="btn btn-primary">➕ Add Book</a>
+                    <a href="#" class="btn btn-success">📥 Import CSV</a>
+                </div>
+            </div>
+
+            <div class="card success">
+                <h3>🔄 Circulation</h3>
+                <p>Track borrowing, returns, and overdue items with automated notifications.</p>
+                <div>
+                    <a href="#" class="btn btn-success">📤 Checkout</a>
+                    <a href="#" class="btn btn-outline">📋 Check-in</a>
+                </div>
+            </div>
+
+            <div class="card warning">
+                <h3>📊 Reports</h3>
+                <p>Generate usage statistics, popular books, and overdue reports.</p>
+                <div>
+                    <a href="#" class="btn btn-warning">📈 Analytics</a>
+                    <a href="#" class="btn btn-outline">📄 Export PDF</a>
+                </div>
+            </div>
+
+            <div class="card danger">
+                <h3>⚠️ Overdue Items</h3>
+                <p>12 items overdue. Automated email reminders sent to borrowers.</p>
+                <div>
+                    <a href="#" class="btn btn-danger">📧 Send Reminders</a>
+                    <a href="#" class="btn btn-outline">📞 Notify All</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <h3 style="margin-bottom: 1rem;">📚 Recent Activity</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Book</th>
+                        <th>Borrower</th>
+                        <th>Checkout</th>
+                        <th>Due</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Clean Code</strong><br><small>Robert C. Martin</small></td>
+                        <td>John Doe</td>
+                        <td>Mar 1, 2026</td>
+                        <td>Mar 15, 2026</td>
+                        <td><span style="color: var(--success);">On Time</span></td>
+                        <td>
+                            <a href="#" class="btn btn-success" style="padding: 6px 12px; font-size: 0.8rem;">Return</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>1984</strong><br><small>George Orwell</small></td>
+                        <td>Jane Smith</td>
+                        <td>Mar 5, 2026</td>
+                        <td><strong>Mar 12, 2026</strong></td>
+                        <td><span style="color: var(--warning);">Due Tomorrow</span></td>
+                        <td>
+                            <a href="#" class="btn btn-warning" style="padding: 6px 12px; font-size: 0.8rem;">Remind</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
